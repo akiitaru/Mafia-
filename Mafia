@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мафия Телеграм Чат</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #222;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #f4c842;
+        }
+        a {
+            color: #f4c842;
+            text-decoration: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #f4c842;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Мафия Телеграм Чат</h1>
+        <p>Присоединяйтесь к нашему чату в Telegram: <a href="#">Ссылка</a></p>
+        <h2>Правила</h2>
+        <p>1. Играть честно<br>2. Не оскорблять игроков<br>3. Соблюдать тайминги</p>
+        
+        <h2>Таблица лидеров</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Место</th>
+                    <th>Игрок</th>
+                    <th>Очки</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard"></tbody>
+        </table>
+    </div>
+    
+    <script>
+        async function loadLeaderboard() {
+            const response = await fetch('leaderboard.json');
+            const data = await response.json();
+            let table = document.getElementById('leaderboard');
+            table.innerHTML = '';
+            data.forEach((player, index) => {
+                table.innerHTML += `<tr><td>${index + 1}</td><td>${player.name}</td><td>${player.points}</td></tr>`;
+            });
+        }
+        loadLeaderboard();
+    </script>
+</body>
+</html>
